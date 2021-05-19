@@ -1,0 +1,17 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: hseeberger/scala-sbt
+    tag: 11.0.10_1.4.8_2.11.12
+
+inputs:
+  - name: fauna-jvm-repository
+  - name: fauna-jvm-repository-docs
+
+outputs:
+  - name: fauna-jvm-repository-updated-docs
+
+run:
+  path: ./fauna-jvm-repository/concourse/scripts/publish_docs.sh

@@ -1,0 +1,21 @@
+---
+platform: linux
+image_resource:
+  type: registry-image
+  source:
+    repository: hseeberger/scala-sbt
+    tag: 11.0.10_1.4.8_2.11.12
+
+params:
+  SONATYPE_USER:
+  SONATYPE_PASS:
+  GPG_PRIVATE_KEY:
+  GPG_PUBLIC_KEY:
+  GPG_PASSPHRASE:
+  GPG_SIGNING_KEY:
+
+inputs:
+  - name: fauna-jvm-repository
+
+run:
+  path: ./fauna-jvm-repository/concourse/scripts/publish.sh
