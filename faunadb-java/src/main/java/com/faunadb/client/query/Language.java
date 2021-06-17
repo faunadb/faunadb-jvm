@@ -3176,6 +3176,333 @@ public final class Language {
     return FindStrRegex(new StringV(value), new StringV(pattern), new LongV(start), new LongV(numResults));
   }
 
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(Expr value, Expr token, Expr count) {
+    return Fn.apply("split_str", value, "token", token, "count", count);
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(String value, String token, long count) {
+    return SplitStr(new StringV(value), new StringV(token), new LongV(count));
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(Expr value, String token, long count) {
+    return SplitStr(value, new StringV(token), new LongV(count));
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(Expr value, Expr token, long count) {
+    return SplitStr(value, token, new LongV(count));
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(Expr value, String token, Expr count) {
+    return SplitStr(value, new StringV(token), count);
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(String value, Expr token, Long count) {
+    return SplitStr(new StringV(value), token, new LongV(count));
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(String value, Expr token, Expr count) {
+    return SplitStr(new StringV(value), token, count);
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(Expr value, Expr token) {
+    return Fn.apply("split_str", value, "token", token);
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(String value, Expr token) {
+    return SplitStr(new StringV(value), token);
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(String value, String token) {
+    return SplitStr(new StringV(value), new StringV(token));
+  }
+
+  /**
+   * SplitStr function splits a string based on a provided token contained in the string
+   *
+   * @param value a string to search
+   * @param token a substring to split on
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstr">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStr(Expr value, String token) {
+    return SplitStr(value, new StringV(token));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(Expr value, Expr pattern, Expr count) {
+    return Fn.apply("split_str_regex", value, "pattern", pattern, "count", count);
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRex(String value, String pattern, long count) {
+    return SplitStrRegex(new StringV(value), new StringV(pattern), new LongV(count));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(Expr value, String pattern, long count) {
+    return SplitStrRegex(value, new StringV(pattern), new LongV(count));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(Expr value, Expr pattern, long count) {
+    return SplitStrRegex(value, pattern, new LongV(count));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(Expr value, String pattern, Expr count) {
+    return SplitStrRegex(value, new StringV(pattern), count);
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(String value, Expr pattern, Long count) {
+    return SplitStrRegex(new StringV(value), pattern, new LongV(count));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(String value, Expr pattern, Expr count) {
+    return SplitStrRegex(new StringV(value), pattern, count);
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(String value, String pattern, Expr count) {
+    return SplitStrRegex(new StringV(value), new StringV(pattern), count);
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @param count the maximal number of element returned
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(String value, String pattern, long count) {
+    return SplitStrRegex(new StringV(value), new StringV(pattern), new LongV(count));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(Expr value, Expr pattern) {
+    return Fn.apply("split_str_regex", value, "pattern", pattern);
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(String value, String pattern) {
+    return SplitStrRegex(new StringV(value), new StringV(pattern));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(Expr value, String pattern) {
+    return SplitStrRegex(value, new StringV(pattern));
+  }
+
+  /**
+   * SplitStrRegex function splits a string based on for a java pattern
+   *
+   * @param value a string to search
+   * @param pattern a java pattern
+   * @return        an array of strings
+   * @see <a href="https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex">FaunaDB String Functions</a>
+   * @see #Value(String)
+   */
+  public static Expr SplitStrRegex(String value, Expr pattern) {
+    return SplitStrRegex(new StringV(value), pattern);
+  }
 
   /**
    * Length function returns the number of characters (codepoints) in the string

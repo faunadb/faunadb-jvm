@@ -906,6 +906,34 @@ public class SerializationSpec {
   }
 
   @Test
+  public void shouldSerializeSplitStr() throws Exception {
+    assertJson(SplitStr("ABCDEF", "ABC", 1L), "{\"split_str\":\"ABCDEF\",\"token\":\"ABC\",\"count\":1}");
+    assertJson(SplitStr("ABCDEF", Value("ABC"), 1L), "{\"split_str\":\"ABCDEF\",\"token\":\"ABC\",\"count\":1}");
+    assertJson(SplitStr("ABCDEF", Value("ABC"), Value(1)), "{\"split_str\":\"ABCDEF\",\"token\":\"ABC\",\"count\":1}");
+  }
+
+  @Test
+  public void shouldSerializeSplitStrNoCount() throws Exception {
+    assertJson(SplitStr("ABCDEF", "ABC"), "{\"split_str\":\"ABCDEF\",\"token\":\"ABC\"}");
+    assertJson(SplitStr("ABCDEF", Value("ABC")), "{\"split_str\":\"ABCDEF\",\"token\":\"ABC\"}");
+    assertJson(SplitStr("ABCDEF", Value("ABC")), "{\"split_str\":\"ABCDEF\",\"token\":\"ABC\"}");
+  }
+
+  @Test
+  public void shouldSerializeSplitStrRegex() throws Exception {
+    assertJson(SplitStrRegex("ABCDEF", ".*", 1L), "{\"split_str_regex\":\"ABCDEF\",\"pattern\":\".*\",\"count\":1}");
+    assertJson(SplitStrRegex("ABCDEF", Value(".*"), 1L), "{\"split_str_regex\":\"ABCDEF\",\"pattern\":\".*\",\"count\":1}");
+    assertJson(SplitStrRegex("ABCDEF", Value(".*"), Value(1)), "{\"split_str_regex\":\"ABCDEF\",\"pattern\":\".*\",\"count\":1}");
+  }
+
+  @Test
+  public void shouldSerializeSplitStrRegexNoCount() throws Exception {
+    assertJson(SplitStrRegex("ABCDEF", ".*"), "{\"split_str_regex\":\"ABCDEF\",\"pattern\":\".*\"}");
+    assertJson(SplitStrRegex("ABCDEF", Value(".*")), "{\"split_str_regex\":\"ABCDEF\",\"pattern\":\".*\"}");
+    assertJson(SplitStrRegex("ABCDEF", Value(".*")), "{\"split_str_regex\":\"ABCDEF\",\"pattern\":\".*\"}");
+  }
+
+  @Test
   public void shouldSerializeLength() throws Exception {
     assertJson(Length("ABC"), "{\"length\":\"ABC\"}");
     assertJson(Length(Value("DEF")), "{\"length\":\"DEF\"}");

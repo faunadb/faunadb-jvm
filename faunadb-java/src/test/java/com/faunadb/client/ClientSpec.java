@@ -1126,6 +1126,49 @@ public class ClientSpec {
   }
 
   @Test
+  public void shouldEvalSplitStrExpression() throws Exception {
+    assertThat(
+      query(SplitStr("Hello world", " ", 2)).get().asCollectionOf(String.class).get(),
+      contains("Hello", "world")
+    );
+    // count is optional
+    assertThat(
+      query(SplitStr("Hello world", " ")).get().asCollectionOf(String.class).get(),
+      contains("Hello", "world")
+    );
+    assertThat(
+      query(SplitStr(Value("Hello world"), " ", 2)).get().asCollectionOf(String.class).get(),
+      contains("Hello", "world")
+    );
+    assertThat(
+      query(SplitStr(Value("Hello world"), Value(" "), Value(2))).get().asCollectionOf(String.class).get(),
+      contains("Hello", "world")
+    );
+    // count is optional
+    assertThat(
+      query(SplitStr(Value("Hello world"), Value(" "))).get().asCollectionOf(String.class).get(),
+      contains("Hello", "world")
+    );
+  }
+
+  @Test
+  public void shouldEvalSplitStrRegexExpression() throws Exception {
+    assertThat(
+      query(SplitStrRegex("Hello world", ".*", 3)).get().asCollectionOf(String.class).get(),
+      contains("", "", "")
+    );
+    assertThat(
+      query(SplitStrRegex(Value("Hello world"), "\\W", 2)).get().asCollectionOf(String.class).get(),
+      contains("Hello", "world")
+    );
+    // count is optional
+    assertThat(
+      query(SplitStrRegex(Value("Hello world"), "\\W")).get().asCollectionOf(String.class).get(),
+      contains("Hello", "world")
+    );
+  }
+
+  @Test
   public void shouldEvalLengthExpression() throws Exception {
     Value res = query(Length(Value("fire and  Ice"))).get();
     assertThat(res.to(LONG).get(), equalTo(13L));
