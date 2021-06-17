@@ -900,6 +900,38 @@ package object query {
   }
 
   /**
+    * A SplitStr expression
+    *
+    *'''Reference''': [[https://docs.fauna.com/fauna/current/api/fql/functions/splitstr]]
+    */
+  def SplitStr(value: Expr, token: Expr, count: Expr): Expr =
+    Expr(ObjectV("split_str" -> value.value, "token" -> token.value, "count" -> count.value))
+
+  /**
+    * A SplitStr expression
+    *
+    *'''Reference''': [[https://docs.fauna.com/fauna/current/api/fql/functions/splitstr]]
+    */
+  def SplitStr(value: Expr, token: Expr): Expr =
+    Expr(ObjectV("split_str" -> value.value, "token" -> token.value))
+
+  /**
+    * A SplitStrRegex expression
+    *
+    *'''Reference''': [[https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex]]
+    */
+  def SplitStrRegex(value: Expr, pattern: Expr, count: Expr): Expr =
+    Expr(ObjectV("split_str_regex" -> value.value, "pattern" -> pattern.value, "count" -> count.value))
+
+  /**
+    * A SplitStrRegex expression
+    *
+    *'''Reference''': [[https://docs.fauna.com/fauna/current/api/fql/functions/splitstrregex]]
+    */
+  def SplitStrRegex(value: Expr, pattern: Expr): Expr =
+    Expr(ObjectV("split_str_regex" -> value.value, "pattern" -> pattern.value))
+
+  /**
     * A RegexEscape expression
     *
     * '''Reference''': [[https://docs.fauna.com/fauna/current/api/fql/functions/regexescape?lang=scala]]

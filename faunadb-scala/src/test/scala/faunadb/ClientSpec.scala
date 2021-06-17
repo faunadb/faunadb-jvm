@@ -669,6 +669,34 @@ class ClientSpec
     (client.query(NGram(Arr("john", "doe"), 3, 4)).futureValue).to[Seq[String]].get shouldBe Seq("joh", "john", "ohn", "doe")
 
     (client.query(Format("%3$s%1$s %2$s", "DB", "rocks", "Fauna")).futureValue).to[String].get shouldBe "FaunaDB rocks"
+
+    val zeroSplitErr = client.query(SplitStr("hello world", " ", 0)).failed.futureValue
+    zeroSplitErr shouldBe a[BadRequestException]
+    zeroSplitErr.getMessage should include ("invalid argument: count must be count > 0")
+    val maxSplitErr = client.query(SplitStr("hello world", " ", 1025)).failed.futureValue
+    maxSplitErr shouldBe a[BadRequestException]
+    maxSplitErr.getMessage should include ("invalid argument: count must be count <= 1024")
+    client.query(SplitStr("hello world", " ", 1)).futureValue.to[Seq[String]].get shouldBe Seq("hello world")
+    client.query(SplitStr("hello world", " ", 2)).futureValue.to[Seq[String]].get shouldBe Seq("hello", "world")
+    // count is optional
+    client.query(SplitStr("hello world", " ")).futureValue.to[Seq[String]].get shouldBe Seq("hello", "world")
+    client.query(SplitStr("hello better world", " ", 2)).futureValue.to[Seq[String]].get shouldBe Seq("hello", "better world")
+    client.query(SplitStr("hello better world", " ", 3)).futureValue.to[Seq[String]].get shouldBe Seq("hello", "better", "world")
+    client.query(SplitStr("hello better world", "better", 2)).futureValue.to[Seq[String]].get shouldBe Seq("hello ", " world")
+
+    val zeroSplitRegexErr = client.query(SplitStrRegex("hello world", ".",0)).failed.futureValue
+    zeroSplitRegexErr shouldBe a[BadRequestException]
+    zeroSplitRegexErr.getMessage should include ("invalid argument: count must be count > 0")
+    val maxSplitRegexErr = client.query(SplitStrRegex("hello world",".", 1025)).failed.futureValue
+    maxSplitRegexErr shouldBe a[BadRequestException]
+    maxSplitRegexErr.getMessage should include ("invalid argument: count must be count <= 1024")
+    val badSplitRegexErr = client.query(SplitStrRegex("hello world", "{", 1)).failed.futureValue
+    badSplitRegexErr shouldBe a[BadRequestException]
+    badSplitRegexErr.getMessage should include ("invalid argument: Search pattern /{/ is not a valid regular expression.")
+    client.query(SplitStrRegex("hello world", ".*", 3)).futureValue.to[Seq[String]].get shouldBe Seq("","","")
+    // count is optional
+    client.query(SplitStrRegex("hello world", ".*")).futureValue.to[Seq[String]].get shouldBe Seq("","","")
+    client.query(SplitStrRegex("hello world", "\\W", 2)).futureValue.to[Seq[String]].get shouldBe Seq("hello", "world")
   }
 
   it should "test math functions" in {
